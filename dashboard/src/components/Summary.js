@@ -8,7 +8,7 @@ function Summary() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/auth/verify", { withCredentials: true })
+      .get("https://finovue.onrender.com/auth/verify", { withCredentials: true })
       .then((res) => {
         if (res.data.status) {
           setUsername(res.data.user); // Set the username

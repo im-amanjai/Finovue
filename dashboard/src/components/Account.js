@@ -6,7 +6,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
-
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 
@@ -27,7 +26,7 @@ export default function AccountMenu() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/auth/verify", { withCredentials: true })
+      .get("https://finovue.onrender.com/auth/verify", { withCredentials: true })
       .then((res) => {
         if (res.data.status) {
           setUsername(res.data.user);
@@ -42,7 +41,7 @@ export default function AccountMenu() {
 
   const handleLogout = () => {
     removeCookie("token");
-    window.location.href = "http://localhost:3000/login"; 
+    window.location.href = "https://your-frontend-url.com/login"; // 🔁 Update with your actual deployed frontend URL
   };
 
   return (

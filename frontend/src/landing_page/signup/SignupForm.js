@@ -38,7 +38,7 @@ const SignupForm = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/auth/signup", //Local backend
+        "https://finovue.onrender.com/auth/signup", // ✅ Production backend URL
         inputValue,
         { withCredentials: true }
       );
@@ -48,7 +48,7 @@ const SignupForm = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "http://localhost:3001/dashboard"; //Local dashboard
+          window.location.href = "https://finovue-dashboard.vercel.app/dashboard"; // ✅ Production dashboard URL
         }, 1000);
       } else {
         handleError(message);

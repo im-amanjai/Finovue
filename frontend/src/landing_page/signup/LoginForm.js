@@ -36,7 +36,7 @@ const Login = () => {
 
     try {
       const data = await axios.post(
-        "http://localhost:3002/auth/login", // Local backend URL
+        "https://finovue.onrender.com/auth/login", // ✅ Deployed backend URL
         formdata,
         { withCredentials: true }
       );
@@ -46,7 +46,7 @@ const Login = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "http://localhost:3001/dashboard"; //Local dashboard URL
+          window.location.href = "https://finovue-dashboard.vercel.app/dashboard"; // ✅ Replace with your deployed dashboard URL
         }, 2000);
       } else {
         handleError(message);

@@ -14,19 +14,21 @@ const SellActionWindow = ({ uid }) => {
   const handleSellClick = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3002/order/checkOrders",
+        "https://finovue.onrender.com/order/checkOrders",
         {
           name: uid,
           qty: stockQuantity,
         }
       );
+
       if (response.data.exists) {
-        await axios.post("http://localhost:3002/order/newOrders", {
+        await axios.post("https://finovue.onrender.com/order/newOrders", {
           name: uid,
           qty: stockQuantity,
           price: stockPrice,
           mode: "SELL",
         });
+
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);

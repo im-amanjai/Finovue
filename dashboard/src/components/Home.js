@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/auth/verify", {
+        const response = await axios.get("https://finovue.onrender.com/auth/verify", {
           withCredentials: true,
         });
 
@@ -20,11 +20,11 @@ const Home = () => {
           setUsername(user);
           toast(`Hello ${user}`, { position: "top-right" });
         } else {
-          window.location.href = "http://localhost:3000/login";
+          window.location.href = "https://finovue.vercel.app/login"; // Update this URL
         }
       } catch (error) {
         console.error("Auth verification failed", error);
-        window.location.href = "http://localhost:3000/login";
+        window.location.href = "https://finovue.vercel.app/login"; // Update this URL
       } finally {
         setIsLoading(false);
       }

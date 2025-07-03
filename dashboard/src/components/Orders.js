@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import "./Orders.css";
 import axios from "axios";
 
 function Orders() {
@@ -7,7 +6,7 @@ function Orders() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/order/allOrders")
+      .get("https://finovue.onrender.com/order/allOrders")
       .then((res) => {
         setAllOrders(res.data);
       })
@@ -18,7 +17,7 @@ function Orders() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3002/order/deleteOrders/${id}`);
+      await axios.delete(`https://finovue.onrender.com/order/deleteOrders/${id}`);
       setAllOrders((prev) => prev.filter((order) => order._id !== id));
     } catch (err) {
       console.error("Error deleting order:", err);
