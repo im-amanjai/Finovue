@@ -1,0 +1,25 @@
+.form-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-card {
+  padding: 2rem;
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 24px 0px rgb(72, 76, 127);
+  border: 2px solid #313f9a9a;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: blue;
+}
+
+.form-footer {
+  margin-top: 1rem;
+  text-align: center;
+}
