@@ -1,3 +1,67 @@
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+
+const authRoute = require("./routes/auth");
+const ordersRoute = require("./routes/OrderRoute");
+const holdingsRoute = require("./routes/HoldingRoute");
+const positionsRoute = require("./routes/PositionRoute");
+
+const PORT = process.env.PORT || 3002;
+const uri = process.env.MONGO_URL;
+
+const app = express();
+
+// CORS setup: allow local + deployed frontend & dashboard
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",             // local frontend
+      "http://localhost:3001",             // local dashboard
+      "https://finovuee.netlify.app",      // deployed frontend
+      "https://finovue-dashboard.vercel.app" // deployed dashboard
+    ],
+    credentials: true,
+  })
+);
+
+// Middleware
+// app.use(bodyParser.json());
+app.use(express.json());
+app.use(cookieParser());
+
+
+// Routes
+app.use("/auth", authRoute);
+app.use("/order", ordersRoute);
+app.use("/holding", holdingsRoute);
+app.use("/position", positionsRoute);
+
+// Connect to MongoDB
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+
+
+
+
 // require("dotenv").config();
 
 // const express = require("express");
@@ -226,63 +290,5 @@
 // });
 
 
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 
-const authRoute = require("./routes/auth");
-const ordersRoute = require("./routes/OrderRoute");
-const holdingsRoute = require("./routes/HoldingRoute");
-const positionsRoute = require("./routes/PositionRoute");
-
-const PORT = process.env.PORT || 3002;
-const uri = process.env.MONGO_URL;
-
-const app = express();
-
-// CORS setup: allow local + deployed frontend & dashboard
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",             // local frontend
-      "http://localhost:3001",             // local dashboard
-      "https://finovuee.netlify.app",      // deployed frontend
-      "https://finovue-dashboard.vercel.app" // deployed dashboard
-    ],
-    credentials: true,
-  })
-);
-
-// Middleware
-// app.use(bodyParser.json());
-app.use(express.json());
-app.use(cookieParser());
-
-
-// Routes
-app.use("/auth", authRoute);
-app.use("/order", ordersRoute);
-app.use("/holding", holdingsRoute);
-app.use("/position", positionsRoute);
-
-// Connect to MongoDB
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("MongoDB connected");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
