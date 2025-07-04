@@ -1,7 +1,9 @@
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const { createSecretToken } = require("../utils/SecretToken");
+require("dotenv").config();
 
+//Signup controller (without setting token)
 module.exports.Signup = async (req, res) => {
   try {
     const { email, username, password, createdAt } = req.body;
@@ -19,18 +21,10 @@ module.exports.Signup = async (req, res) => {
       createdAt,
     });
 
-    const token = createSecretToken(newUser._id);
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-    });
-
+    //Do not set token during signup
     return res.status(201).json({
-      message: "User signed up successfully",
+      message: "User registered successfully. Please log in.",
       success: true,
-      user: newUser.username, // optional if needed after signup
     });
   } catch (err) {
     console.error(err);
@@ -38,6 +32,7 @@ module.exports.Signup = async (req, res) => {
   }
 };
 
+//Login controller (sets cookie and token)
 module.exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -59,7 +54,7 @@ module.exports.Login = async (req, res) => {
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "None",
+      sameSite: "None", // allow cross-site cookies
       secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
@@ -67,7 +62,6 @@ module.exports.Login = async (req, res) => {
     return res.status(200).json({
       message: "User logged in successfully",
       success: true,
-      user: user.username, // ✅ frontend expects this
     });
   } catch (err) {
     console.error(err);
