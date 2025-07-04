@@ -95,7 +95,7 @@ function Footer() {
             of allotment. In case of non allotment the funds will remain in your
             bank account. As a business we don't give stock tips, and have not
             authorized anyone to trade on behalf of others. If you find anyone
-            claiming to be part of Zerodha and offering such services, please
+            claiming to be part of Finovue and offering such services, please
             create a ticket here.
           </p>
         </div>

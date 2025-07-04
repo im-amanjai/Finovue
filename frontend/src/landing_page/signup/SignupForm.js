@@ -38,7 +38,7 @@ const SignupForm = () => {
 
     try {
       const { data } = await axios.post(
-        "https://finovue.onrender.com/auth/signup", // ✅ Production backend URL
+        "https://finovue.onrender.com/auth/signup",
         inputValue,
         { withCredentials: true }
       );
@@ -48,8 +48,8 @@ const SignupForm = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://finovue-dashboard.vercel.app/dashboard"; // ✅ Production dashboard
-        }, 1000);
+          window.location.href = "https://finovuee.netlify.app/login";
+        }, 2000);
       } else {
         handleError(message);
       }
