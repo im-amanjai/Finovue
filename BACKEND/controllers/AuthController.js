@@ -1,12 +1,10 @@
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const { createSecretToken } = require("../utils/SecretToken");
-require("dotenv").config();
 
-//Signup controller (without setting token)
 module.exports.Signup = async (req, res) => {
   try {
-    const { email, username, password } = req.body;
+    const { email, username, password, createdAt } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -14,11 +12,11 @@ module.exports.Signup = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({
+    await User.create({
       email,
       username,
       password: hashedPassword,
-      createdAt: new Date(), //Set createdAt here
+      createdAt,
     });
 
     return res.status(201).json({
@@ -26,13 +24,11 @@ module.exports.Signup = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.error(err);
+    console.error("Signup error:", err);
     return res.status(500).json({ message: "Server error" });
   }
 };
 
-
-//Login controller (sets cookie and token)
 module.exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -43,20 +39,22 @@ module.exports.Login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
+      console.log("Login failed: user not found for", email);
       return res.status(401).json({ message: "User not found" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
+      console.log("Login failed: invalid password for", email);
       return res.status(401).json({ message: "Incorrect email or password" });
     }
 
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "None", // allow cross-site cookies
+      sameSite: "None",
       secure: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     return res.status(200).json({
@@ -64,7 +62,7 @@ module.exports.Login = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.error(err);
+    console.error("Login error:", err);
     return res.status(500).json({ message: "Server error" });
   }
 };
