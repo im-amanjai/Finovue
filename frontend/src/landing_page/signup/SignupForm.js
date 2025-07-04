@@ -48,8 +48,8 @@ const SignupForm = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://finovuee.netlify.app/login";
-        }, 2000);
+          window.location.href = "https://finovuee.netlify.app/login"; //Redirect to login page
+        }, 1500);
       } else {
         handleError(message);
       }
