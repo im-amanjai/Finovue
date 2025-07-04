@@ -257,9 +257,10 @@ app.use(
 );
 
 // Middleware
-app.use(bodyParser.json());
-app.use(cookieParser());
+// app.use(bodyParser.json());
 app.use(express.json());
+app.use(cookieParser());
+
 
 // Routes
 app.use("/auth", authRoute);
