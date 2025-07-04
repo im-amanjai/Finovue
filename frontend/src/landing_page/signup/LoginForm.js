@@ -11,14 +11,15 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const { email, password } = formdata;
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setFormdata({
-      ...formdata,
+    setFormdata((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleError = (err) =>
@@ -35,31 +36,28 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const data = await axios.post(
-        "https://finovue.onrender.com/auth/login", // ✅ Deployed backend URL
+      const res = await axios.post(
+        "https://finovue.onrender.com/auth/login",
         formdata,
         { withCredentials: true }
       );
 
-      const { success, message } = data.data;
+      const { success, message } = res.data;
 
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://finovue-dashboard.vercel.app/dashboard"; // ✅ Replace with your deployed dashboard URL
+          window.location.href = "https://finovue-dashboard.vercel.app/dashboard";
         }, 2000);
       } else {
-        handleError(message);
+        handleError(message || "Login failed.");
       }
     } catch (err) {
-      console.log(err);
+      console.error("Login error:", err);
       handleError("Login failed. Check your credentials.");
     }
 
-    setFormdata({
-      email: "",
-      password: "",
-    });
+    setFormdata({ email: "", password: "" });
   };
 
   return (
@@ -98,7 +96,7 @@ const Login = () => {
           </Button>
 
           <span style={{ marginTop: "1rem", display: "block" }}>
-            Don't have an account? <Link to="/signup">SignUp</Link>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
           </span>
         </form>
       </Paper>

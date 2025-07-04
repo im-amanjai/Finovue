@@ -1,9 +1,9 @@
-import Hero from "./Hero";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button, Paper } from "@mui/material";
+import Hero from "./Hero";
 import "./SignupForm.css";
 
 const SignupForm = () => {
@@ -17,10 +17,10 @@ const SignupForm = () => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
+    setInputValue((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const handleError = (err) =>
@@ -48,13 +48,13 @@ const SignupForm = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://finovue-dashboard.vercel.app/dashboard"; // ✅ Production dashboard URL
+          window.location.href = "https://finovue-dashboard.vercel.app/dashboard"; // ✅ Production dashboard
         }, 1000);
       } else {
         handleError(message);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Signup failed:", error);
       handleError("Signup failed. Try again.");
     }
 
@@ -73,8 +73,8 @@ const SignupForm = () => {
           <div className="col-8">
             <img
               src="/media/images/account_open.svg"
+              alt="Account Open"
               style={{ width: "600px" }}
-              alt=""
             />
           </div>
           <div className="col-4">
