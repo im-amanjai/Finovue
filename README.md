@@ -2,6 +2,8 @@
 
 Finovue is a full-stack web application that allows users to monitor their stock holdings, orders, and positions in one place. Built with a modular MERN architecture, it offers a secure login system, an interactive dashboard, and responsive design.
 
+🟢 Live Demo → https://finovuee.netlify.app/
+
 ---
 
 ## 🚦 Overview
@@ -88,16 +90,6 @@ cd ../dashboard
 npm install
 npm start
 ```
-
----
-
-## 🌐 Live Demo Links
-
-| Part      | URL                                                                          |
-| --------- | ---------------------------------------------------------------------------- |
-| Frontend  | [https://finovuee.netlify.app](https://finovuee.netlify.app)                 |
-| Dashboard | [https://finovue-dashboard.vercel.app](https://finovue-dashboard.vercel.app) |
-| Backend   | [https://finovue.onrender.com](https://finovue.onrender.com)                 |
 
 ---
 
