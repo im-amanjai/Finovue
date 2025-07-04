@@ -20,9 +20,4 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
-userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 12);
-});
-
 module.exports = userSchema;
