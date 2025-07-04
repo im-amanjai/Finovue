@@ -1,6 +1,6 @@
 # 💸 Finovue - Stock Portfolio Tracker
 
-Finovue is a full-stack web application that allows users to monitor their stock holdings, orders, and positions in one place. Built with a modular MERN architecture, it offers a secure login system, an interactive dashboard, and responsive design.
+Finovue is a full-stack web application that allows users to monitor their stock holdings, orders, and positions in one place. Built with a modular MERN Stack(MongoDB, Express.js, React.js, Node.js)architecture, it offers a secure login system, an interactive dashboard, and responsive design.
 
 🟢 Live Demo → https://finovuee.netlify.app/
 
