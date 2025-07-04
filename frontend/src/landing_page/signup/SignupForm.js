@@ -54,7 +54,7 @@ const SignupForm = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "/login"; // ✅ redirect to login
+          window.location.href = "/login"; //redirect to login
         }, 2000);
       } else {
         handleError(message);
