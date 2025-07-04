@@ -24,31 +24,39 @@ const Login = () => {
 
   const handleError = (err) =>
     toast.error(err, {
-      position: "bottom-left",
+      position: "top-right",
     });
 
   const handleSuccess = (msg) =>
     toast.success(msg, {
-      position: "bottom-left",
+      position: "top-right",
     });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Trim input before sending
+    const trimmedData = {
+      email: email.trim(),
+      password: password.trim(),
+    };
+
     try {
+      console.log("Attempting login with:", trimmedData);
+
       const res = await axios.post(
         "https://finovue.onrender.com/auth/login",
-        formdata,
+        trimmedData,
         { withCredentials: true }
       );
 
       const { success, message } = res.data;
 
       if (success) {
-        handleSuccess(message);
+        handleSuccess(message || "Login successful!");
         setTimeout(() => {
           window.location.href = "https://finovue-dashboard.vercel.app/dashboard";
-        }, 2000);
+        }, 1500);
       } else {
         handleError(message || "Login failed.");
       }
@@ -57,6 +65,7 @@ const Login = () => {
       handleError("Login failed. Check your credentials.");
     }
 
+    // Clear form
     setFormdata({ email: "", password: "" });
   };
 
