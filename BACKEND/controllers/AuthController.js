@@ -30,6 +30,7 @@ module.exports.Signup = async (req, res) => {
     return res.status(201).json({
       message: "User signed up successfully",
       success: true,
+      user: newUser.username, // optional if needed after signup
     });
   } catch (err) {
     console.error(err);
@@ -60,12 +61,13 @@ module.exports.Login = async (req, res) => {
       httpOnly: true,
       sameSite: "None",
       secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
     return res.status(200).json({
       message: "User logged in successfully",
       success: true,
+      user: user.username, // ✅ frontend expects this
     });
   } catch (err) {
     console.error(err);

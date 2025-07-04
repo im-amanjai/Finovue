@@ -243,11 +243,16 @@ const uri = process.env.MONGO_URL;
 
 const app = express();
 
-// CORS setup to allow both frontend and dashboard
+// CORS setup: allow local + deployed frontend & dashboard
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
-    credentials: true, // allow cookies
+    origin: [
+      "http://localhost:3000",             // local frontend
+      "http://localhost:3001",             // local dashboard
+      "https://finovuee.netlify.app",      // deployed frontend
+      "https://finovue-dashboard.vercel.app" // deployed dashboard
+    ],
+    credentials: true,
   })
 );
 
@@ -262,20 +267,21 @@ app.use("/order", ordersRoute);
 app.use("/holding", holdingsRoute);
 app.use("/position", positionsRoute);
 
-//Connect to MongoDB
+// Connect to MongoDB
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log(" MongoDB connected");
+    console.log("✅ MongoDB connected");
   })
   .catch((err) => {
-    console.error(" MongoDB connection error:", err);
+    console.error("❌ MongoDB connection error:", err);
   });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(` Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
+
