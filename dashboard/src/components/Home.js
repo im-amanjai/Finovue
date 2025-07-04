@@ -20,11 +20,11 @@ const Home = () => {
           setUsername(user);
           toast(`Hello ${user}`, { position: "top-right" });
         } else {
-          window.location.href = "https://finovue.vercel.app/login"; // Update this URL
+          window.location.href = "https://finovuee.netlify.app/login";
         }
       } catch (error) {
         console.error("Auth verification failed", error);
-        window.location.href = "https://finovue.vercel.app/login"; // Update this URL
+        window.location.href = "https://finovuee.netlify.app/login"; 
       } finally {
         setIsLoading(false);
       }

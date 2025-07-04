@@ -26,7 +26,9 @@ export default function AccountMenu() {
 
   useEffect(() => {
     axios
-      .get("https://finovue.onrender.com/auth/verify", { withCredentials: true })
+      .get("https://finovue.onrender.com/auth/verify", {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data.status) {
           setUsername(res.data.user);
@@ -39,10 +41,10 @@ export default function AccountMenu() {
 
   const firstLetter = username ? username.charAt(0).toUpperCase() : "";
 
-  const handleLogout = () => {
-    removeCookie("token");
-    window.location.href = "https://your-frontend-url.com/login"; // 🔁 Update with your actual deployed frontend URL
-  };
+ const handleLogout = () => {
+  removeCookie("token", { path: "/" }); 
+  window.location.href = "https://finovuee.netlify.app/login"; 
+};
 
   return (
     <React.Fragment>
