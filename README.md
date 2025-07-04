@@ -93,11 +93,11 @@ npm start
 
 ---
 
-## 🧪 Test Credentials (for Demo)
+## 🧪 Demo Login
 
 ```
-Email: demo@finovue.com
-Password: Demo1234@
+Email: jaiswalaman9129@gmail.com
+Password: aman1234@
 ```
 
 ---
