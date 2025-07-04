@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button, Box, Paper } from "@mui/material";
-
 import "./LoginForm.css";
 
 const Login = () => {
@@ -24,26 +23,25 @@ const Login = () => {
 
   const handleError = (err) =>
     toast.error(err, {
-      position: "top-right",
+      position: "bottom-left",
     });
 
   const handleSuccess = (msg) =>
     toast.success(msg, {
-      position: "top-right",
+      position: "bottom-left",
     });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Trim input before sending
     const trimmedData = {
       email: email.trim(),
       password: password.trim(),
     };
 
-    try {
-      console.log("Attempting login with:", trimmedData);
+    console.log("Attempting login with:", trimmedData);
 
+    try {
       const res = await axios.post(
         "https://finovue.onrender.com/auth/login",
         trimmedData,
@@ -53,10 +51,10 @@ const Login = () => {
       const { success, message } = res.data;
 
       if (success) {
-        handleSuccess(message || "Login successful!");
+        handleSuccess(message);
         setTimeout(() => {
           window.location.href = "https://finovue-dashboard.vercel.app/dashboard";
-        }, 1500);
+        }, 2000);
       } else {
         handleError(message || "Login failed.");
       }
@@ -65,7 +63,6 @@ const Login = () => {
       handleError("Login failed. Check your credentials.");
     }
 
-    // Clear form
     setFormdata({ email: "", password: "" });
   };
 

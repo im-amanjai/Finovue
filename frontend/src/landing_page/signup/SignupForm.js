@@ -36,10 +36,16 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const trimmedData = {
+      email: email.trim(),
+      username: username.trim(),
+      password: password.trim(),
+    };
+
     try {
       const { data } = await axios.post(
         "https://finovue.onrender.com/auth/signup",
-        inputValue,
+        trimmedData,
         { withCredentials: true }
       );
 
@@ -48,8 +54,8 @@ const SignupForm = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://finovuee.netlify.app/login"; //Redirect to login page
-        }, 1500);
+          window.location.href = "/login"; // ✅ redirect to login
+        }, 2000);
       } else {
         handleError(message);
       }
