@@ -37,19 +37,24 @@ module.exports.Login = async (req, res) => {
     const email = req.body.email.trim().toLowerCase();
     const password = req.body.password.trim();
 
+    console.log("🟡 Incoming login:", { email, password });
+
     if (!email || !password) {
       return res.status(400).json({ message: "Please enter all fields" });
     }
 
     const user = await User.findOne({ email });
+
     if (!user) {
-      console.log("Login failed: user not found for", email);
+      console.log("🔴 User not found for:", email);
       return res.status(401).json({ message: "User not found" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log("🔵 Password match:", isPasswordValid);
+
     if (!isPasswordValid) {
-      console.log("Login failed: invalid password for", email);
+      console.log("🔴 Invalid password for:", email);
       return res.status(401).json({ message: "Incorrect email or password" });
     }
 
@@ -61,6 +66,7 @@ module.exports.Login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
+    console.log("✅ User logged in:", email);
     return res.status(200).json({
       message: "User logged in successfully",
       success: true,
