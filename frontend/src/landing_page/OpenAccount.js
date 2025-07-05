@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; //Import useNavigate
 
 function OpenAccount() {
+  const navigate = useNavigate(); //Initialize navigate
+
+  const handleSignupClick = () => {
+    navigate("/signup"); //Redirect to signup route
+  };
+
   return (
     <div className="container p-5 mb-5">
       <div className="row text-center">
@@ -11,7 +18,8 @@ function OpenAccount() {
         </p>
         <button
           className="p-2 btn btn-primary fs-5 mb-5"
-          style={{ width: "20%", margin: "0 auto" }}
+          style={{ width: "60%", maxWidth: "300px", margin: "0 auto" }}
+          onClick={handleSignupClick} //Bind the click
         >
           Sign up Now
         </button>

@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; //Import useNavigate
 
 function Universe() {
+  const navigate = useNavigate(); //Initialize navigate
+
+  const handleSignupClick = () => {
+    navigate("/signup"); //Navigate to the signup route
+  };
+
   return (
     <div className="container mt-5">
       <div className="row text-center justify-content-center">
@@ -93,6 +100,7 @@ function Universe() {
         {/* CTA Button */}
         <div className="d-flex justify-content-center mt-4">
           <button
+            onClick={handleSignupClick} //Bind click event
             className="btn btn-primary fs-5 px-4 py-2"
             style={{ borderRadius: "6px" }}
           >
