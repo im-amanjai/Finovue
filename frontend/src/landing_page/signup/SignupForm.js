@@ -4,7 +4,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { TextField, Button, Paper } from "@mui/material";
 import Hero from "./Hero";
-import "./SignupForm.css";
 
 const SignupForm = () => {
   const [inputValue, setInputValue] = useState({
@@ -54,7 +53,7 @@ const SignupForm = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "/login"; //redirect to login
+          window.location.href = "/login";
         }, 2000);
       } else {
         handleError(message);
@@ -74,18 +73,20 @@ const SignupForm = () => {
   return (
     <>
       <Hero />
-      <div className="container">
-        <div className="row m-5">
-          <div className="col-8">
+      <div className="container py-4">
+        <div className="row align-items-center justify-content-center">
+          <div className="col-md-6 col-12 text-center mb-4">
             <img
               src="/media/images/account_open.svg"
               alt="Account Open"
-              style={{ width: "600px" }}
+              className="img-fluid"
+              style={{ maxWidth: "500px" }}
             />
           </div>
-          <div className="col-4">
-            <Paper className="form-card">
-              <h2 className="form-title">Signup</h2>
+
+          <div className="col-md-6 col-12">
+            <Paper elevation={3} className="p-4">
+              <h2 className="form-title text-center mb-3">Signup</h2>
               <form onSubmit={handleSubmit}>
                 <TextField
                   type="email"
@@ -127,14 +128,14 @@ const SignupForm = () => {
                   Signup
                 </Button>
 
-                <span style={{ marginTop: "1rem", display: "block" }}>
+                <span style={{ marginTop: "1rem", display: "block", textAlign: "center" }}>
                   Already have an account? <Link to="/login">Login</Link>
                 </span>
               </form>
             </Paper>
-            <ToastContainer />
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

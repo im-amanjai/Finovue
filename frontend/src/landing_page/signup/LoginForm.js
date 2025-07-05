@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { TextField, Button, Box, Paper } from "@mui/material";
-import "./LoginForm.css";
+import { TextField, Button, Paper } from "@mui/material";
+import Hero from "./Hero";
 
 const Login = () => {
   const [formdata, setFormdata] = useState({
@@ -28,7 +28,7 @@ const Login = () => {
 
   const handleSuccess = (msg) =>
     toast.success(msg, {
-      position: "bottom-left",
+      position: "bottom-right",
     });
 
   const handleSubmit = async (e) => {
@@ -38,8 +38,6 @@ const Login = () => {
       email: email.trim(),
       password: password.trim(),
     };
-
-    console.log("Attempting login with:", trimmedData);
 
     try {
       const res = await axios.post(
@@ -67,47 +65,53 @@ const Login = () => {
   };
 
   return (
-    <Box className="form-container">
-      <Paper className="form-card">
-        <h2 className="form-title">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            type="email"
-            label="Email"
-            name="email"
-            value={email}
-            onChange={handleOnChange}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            type="password"
-            label="Password"
-            name="password"
-            value={password}
-            onChange={handleOnChange}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            style={{ marginTop: "1rem" }}
-          >
-            Login
-          </Button>
-
-          <span style={{ marginTop: "1rem", display: "block" }}>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
-          </span>
-        </form>
-      </Paper>
-      <ToastContainer />
-    </Box>
+    <>
+      <Hero />
+      <div className="container py-4">
+        <div className="row align-items-center justify-content-center">
+          <div className="col-md-6 col-12">
+            <Paper elevation={3} className="p-4">
+              <h2 className="form-title text-center mb-3">Login</h2>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  type="email"
+                  label="Email"
+                  name="email"
+                  value={email}
+                  onChange={handleOnChange}
+                  fullWidth
+                  margin="normal"
+                  required
+                />
+                <TextField
+                  type="password"
+                  label="Password"
+                  name="password"
+                  value={password}
+                  onChange={handleOnChange}
+                  fullWidth
+                  margin="normal"
+                  required
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  style={{ marginTop: "1rem" }}
+                >
+                  Login
+                </Button>
+                <span style={{ marginTop: "1rem", display: "block", textAlign: "center" }}>
+                  Don't have an account? <Link to="/signup">Sign Up</Link>
+                </span>
+              </form>
+            </Paper>
+          </div>
+        </div>
+        <ToastContainer />
+      </div>
+    </>
   );
 };
 
